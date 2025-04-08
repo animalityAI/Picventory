@@ -31,41 +31,7 @@ You can integrate Picventory with:
 
 ### 1. Replace the Mock Implementation
 
-The core AI functionality is in `picventory/image_analysis.py`. Replace the `analyze_image` function with your own implementation that uses a real AI model:
-
-```python
-def analyze_image(image_path):
-    """Analyze image and return detected items.
-    
-    Args:
-        image_path: Path to the uploaded image file
-        
-    Returns:
-        List of dictionaries with detected items and their properties
-    """
-    # Load your AI model
-    model = load_model('path/to/your/model')
-    
-    # Load and preprocess the image
-    image = preprocess_image(image_path)
-    
-    # Run inference
-    detections = model.predict(image)
-    
-    # Process results
-    items = []
-    for detection in detections:
-        if detection['confidence'] > 0.7:  # Confidence threshold
-            items.append({
-                'name': detection['class_name'],
-                'category': map_to_category(detection['class_name']),
-                'description': f"Detected {detection['class_name']} in uploaded image",
-                'quantity': estimate_quantity(detection),
-                'confidence': detection['confidence']
-            })
-    
-    return items
-```
+The core AI functionality is in `picventory/image_analysis.py`. Replace the `analyze_image` function with your own implementation that uses a real AI model.
 
 ### 2. Model Storage
 
@@ -73,16 +39,7 @@ Place your trained models in the `picventory/models/` directory and reference th
 
 ### 3. Environment Configuration
 
-Update your `.env` file with the appropriate model paths or API keys:
-
-```
-# AI model configuration
-MODEL_PATH=models/detection_model.h5
-CLASSIFICATION_MODEL_PATH=models/classification_model.h5
-
-# Or for cloud services
-GOOGLE_CLOUD_VISION_API_KEY=your_api_key
-```
+Update your `.env` file with the appropriate model paths or API keys.
 
 ## Training Custom Models
 
